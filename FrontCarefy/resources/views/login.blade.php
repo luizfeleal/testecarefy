@@ -24,7 +24,7 @@
                 <input type="password" name="password" class="input-text" id="password" placeholder="Senha">
             </div>
             <div class="div-button-login">
-                <button type="button" class="button-primary">Login</button>
+                <button type="button" class="button-primary">Entrar</button>
             </div>
             <hr>
             <p>Ou</p>
