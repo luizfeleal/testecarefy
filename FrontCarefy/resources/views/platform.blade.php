@@ -16,6 +16,10 @@
         <div class="content-platform">
             <h1>Plataforma</h1>
 
+            <div class="div-add-person">
+                <button class="button-green" id="button-add">+ Adicionar</button>
+            </div>
+
             <table class="table-fill">
                 <thead>
                     <tr>
@@ -27,8 +31,8 @@
                 <tbody class="table-hover">
                     <tr>
                         <td class="text-left">João</td>
-                        <td class="text-left">Editar</td>
-                        <td class="text-left">Excluir</td>
+                        <td class="text-left"><img src="{{ asset('img/icons/pencil.png') }}" alt="Envelope icon" width="18px" height="18px"></td>
+                        <td class="text-left"><button><img src="{{ asset('img/icons/trash-can.png') }}" alt="Envelope icon" width="18px" height="18px"></button></td>
                     </tr>
                     <tr>
                         <td class="text-left">Miguel</td>
@@ -44,5 +48,18 @@
             </table>
         </div>
     </div>
+
+    <div id="modal" class="modal-container">
+        <div class="modal-popup">
+            <div id="message">
+
+            </div>
+            <button type="button" id="button-modal" class="btn btn-primary" style="width: 98px;">Ok</button>
+        </div>
+    </div>
+
+    <script src="{{ asset('js/Events.js') }}"></script>
+    <script src="{{ asset('js/Validations.js') }}"></script>
+    <script src="{{ asset('js/Assets.js') }}"></script>
 </body>
 </html>
