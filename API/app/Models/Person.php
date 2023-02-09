@@ -15,15 +15,13 @@ class Person extends Model
     public function rules() {
         return [
 
-            'nome' => 'required|max:20',
-            'cpf' => 'required|max:15|unique:clientes'
+            'nome' => 'required|max:40'
         ];
     }
 
     public function feedback() {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'cpf.unique' => 'O :attribute informado já existe',
             'max' => 'O campo :attribute deve ter no máximo :max caracteres'
         ];
     }
