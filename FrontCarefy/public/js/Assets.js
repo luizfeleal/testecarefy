@@ -25,7 +25,7 @@ const login = (data) =>{
                     if(res.authenticated === true){
                         window.location.href = `http://localhost:9000/auth/login?id=${res.user_id}`
                     }else{
-                        console.log('usuário não encontrado')
+                        modalError('login');
                     }
                 });
             })
@@ -36,22 +36,28 @@ const login = (data) =>{
             console.log('email ou senha incorreto');
         }
 }
+const cpfMask = (cpf) => {
+    cpf=cpf.replace(/\D/g,"")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+    cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    return cpf
+}
 
 const setTable = (data) => {
     for(let i = 0; i < data.length; i++){
-        var tr = `<tr><td class="text-left">${data[i].nome}</td><td class="text-left"><button class="button-edit${i} button-table" onclick="modalData('update',${data[i].id})"><img src="img/icons/pencil.png" alt="Envelope icon" width="18px" height="18px"></button></td><td class="text-left"><button class="button-edit${i} button-table" onclick="delete_person(${data[i].id})"><img src="img/icons/trash-can.png" alt="Envelope icon" width="18px" height="18px"></button></td></tr>`
+        var tr = `<tr><td class="text-left">${data[i].id}</td><td class="text-left">${data[i].nome}</td><td class="text-left"><button class="button-edit${i} button-table" onclick="modalData('update',${data[i].id})"><img src="img/icons/pencil.png" alt="Envelope icon" width="18px" height="18px"></button></td><td class="text-left"><button class="button-edit${i} button-table" onclick="delete_person(${data[i].id})"><img src="img/icons/trash-can.png" alt="Envelope icon" width="18px" height="18px"></button></td></tr>`
         $(".table-hover").append(tr);
     }
     //document.querySelector('.table-hover').innerHTML = tr;
     //document.querySelector(`.trash${0}`).src='{{ asset("/img/icons/pencil.png") }}'
 }
 const register_person = () => {
+    showLoading();
     var nome = document.getElementById('nome-cliente').value;
-    var cpf = document.getElementById('cpf').value;
 
     var input = new Object;
     input.nome = nome;
-    input.cpf = cpf;
 
     var options = {
         method: 'POST',
@@ -69,19 +75,22 @@ const register_person = () => {
             res.json()
             .then((res)=>{
                 modalSucess("register");
+                hideLoading()
             });
         })
         .catch((error) => {
             modalError("register");
+            hideLoading();
         });
 }
 const update_person = (id) => {
-    var changedField = document.querySelectorAll('.changed');
+
+
+    showLoading();
+
 
     var input = new Object;
-    for(let i = 0; i < changedField.length; i++){
-        input[`${changedField[i].name}`] = changedField[i].value
-    }
+    input.nome = document.querySelector("#nome-cliente").value;
 
     var options = {
         method: 'PUT',
@@ -99,14 +108,16 @@ const update_person = (id) => {
             res.json()
             .then((res)=>{
                 modalSucess("update");
+                hideLoading();
             });
         })
         .catch((error) => {
             modalError("update");
+            hideLoading();
         });
 }
 const delete_person = (id) => {
-
+showLoading();
 
     var options = {
         method: 'DELETE',
@@ -123,14 +134,16 @@ const delete_person = (id) => {
             res.json()
             .then((res)=>{
                 modalSucess("delete");
+                hideLoading();
             });
         })
         .catch((error) => {
             modalError("delete");
+            hideLoading();
         });
 }
 const get_all_person = () => {
-
+showLoading();
     var options = {
         method: 'GET',
         headers: {
@@ -145,52 +158,68 @@ const get_all_person = () => {
         .then((res) => {
             res.json()
             .then((res)=>{
-                modalSucess("register");
                 setTable(res);
+                hideLoading();
             });
         })
         .catch((error) => {
             modalError("register");
+            hideLoading();
         });
 }
 
-const modalSucess = (param) =>{
+const hideModal = () => {
+    window.location.reload();
+    var modalContainer = document.querySelector('.modal-container');
+    modalContainer.style.display = "none";
+}
+
+const showLoading = () =>{
+    $(".modal-container-loading").css("display", "flex");
+}
+const hideLoading = () =>{
+    $(".modal-container-loading").css("display", "none");
+}
+
+
+const modalSucess =(param) =>{
+    $(".modal-container").css("display", "flex");
+    $(".modal-popup").empty();
     if(param === "register"){
-        console.log("usuário cadastrado")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Usuário cadastrado com sucesso!</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
     }else if(param === "update"){
-        console.log("usuário editado")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Usuário atualizado com sucesso!</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
     }else if(param === "delete"){
-        console.log("usuário usuário removido")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Usuário removido!</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
     }
 }
 
 const modalError = (param) =>{
+    $(".modal-popup").empty();
+    $(".modal-container").css("display", "flex");
     if(param === "register"){
-        console.log("houve um erro ao tentar cadastrar usuário")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Houve um erro ao tentar fazer o registro :(</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
     }else if(param === "update"){
-        console.log("houve um erro ao tentar editar usuário")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Houve um erro ao tentar atualizar :(</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
     }else if(param === "delete"){
-        console.log("houve um erro ao tentar excluir usuário")
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Houve um erro ao deletar :(</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`);
+    }else if(param === "login"){
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 50px;">Email ou senha incorreto(s)</h2></div><button type="button" id="button-modal" class="button-primary" style="width: 98px;" onclick="hideModal()">Ok</button>`)
     }
 }
 
 const modalData = (param, id) => {
-    let modalContainer = document.querySelector('.modal-container');
-    let modalContent = document.querySelector('.modal-popup');
-    let modalMessage = document.querySelector('#message');
-    if(param === "register"){
-        modalContainer.style.display = "flex";
-        //modalMessage.innerHTML = '<h2>Adicionar cliente</h2>'
-        modalContent.innerHTML = `<div id="message"><h2>Adicionar cliente</h2></div><label for="nome-cliente">Nome:</label> <input type="text" name="nome-cliente" class="input-text" id="nome-cliente"/> <label for="cpf">CPF:</label> <input type="text" name="cpf" class="input-text" id="cpf"/><div><button onclick="register_person()">Adicionar</button></div>`
 
+    $(".modal-container").css("display", "flex");
+    $(".modal-popup").empty();
+
+    if(param === "register"){
+        $(".modal-popup").append(`<div id="message"><h2 style="padding-bottom: 30px;">Adicionar cliente</h2></div><label for="nome-cliente">Nome:</label> <input type="text" name="nome-cliente" class="input-text" id="nome-cliente"/> <div><button onclick="register_person()" class="button-primary">Adicionar</button></div>`)
     }else if(param === "update"){
-        modalContainer.style.display = "flex";
-        //modalMessage.innerHTML = '<h2>Adicionar cliente</h2>'
-        modalContent.innerHTML = '<div id="message"><h2>Atualizar cliente</h2></div><label for="nome-cliente">Nome:</label> <input type="text" name="nome-cliente" class="input-text" id="nome-cliente"/> <label for="cpf">CPF:</label> <input type="text" name="cpf" class="input-text" id="cpf"/><div><button onclick="update_person(2)">Salvar</button></div>'
+        $(".modal-popup").append(`<div id="message"><h2>Atualizar cliente</h2></div><label for="nome-cliente">Nome:</label> <input type="text" name="nome-cliente" class="input-text" id="nome-cliente"/> <div><button id="save-edit" class="button-primary" onclick="update_person(${id})">Salvar</button></div>`)
+
     }else{
-        modalContainer.style.display = "flex";
-        //modalMessage.innerHTML = '<h2>Adicionar cliente</h2>'
-        modalContent.innerHTML = '<div id="message"><h2>Excluir cliente</h2></div><div><button>Excluir</button></div>'
+        $(".modal-popup").append('<div id="message"><h2>Excluir cliente</h2></div><div><button>Excluir</button></div>')
     }
 }
 

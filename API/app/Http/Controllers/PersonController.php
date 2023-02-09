@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Person;
 
-class UserController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $person = Person::all();
+        return response()->json($person, 200);
     }
 
     /**
@@ -24,7 +26,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(Person::rules(), Person::feedback());
+
+        $people = Person::create($request->all());
+
+        return response()->json($people, 200);
     }
 
     /**
@@ -35,7 +41,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $people = Person::find($id);
+
+        return response()->json($people, 200);
     }
 
     /**
@@ -47,7 +55,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $findPerson = Person::find($id);
+        $person= $findPerson->update($request->all());
+        return response()->json($person, 200);
     }
 
     /**
@@ -58,6 +68,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $findPerson = Person::find($id);
+        $person = $findPerson->delete();
+        return response()->json($person, 200);
     }
 }

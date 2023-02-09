@@ -102,14 +102,16 @@ button{
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    padding: 30px 0px 10px;
 }
 
 .button-green{
     width: 100px;
-    height: 50px;
+    height: 30px;
     background-color: green;
     color: white;
     cursor: pointer;
+    border-radius: 50px;
 }
 
 hr{
@@ -224,12 +226,13 @@ tr:last-child td:last-child {
 td {
   background:#FFFFFF;
   padding:20px;
-  text-align:left;
+  text-align:center;
   vertical-align:middle;
   font-weight:300;
   font-size:18px;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
+
 }
 
 td:last-child {
@@ -249,7 +252,7 @@ th.text-right {
 }
 
 td.text-left {
-  text-align: left;
+  text-align: center;
 }
 
 td.text-center {
@@ -257,7 +260,7 @@ td.text-center {
 }
 
 td.text-right {
-  text-align: right;
+  text-align: center;
 }
 
 .modal-container {
@@ -272,6 +275,18 @@ td.text-right {
     align-items: center;
     display: none;
 }
+.modal-container-loading {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
 
 .modal-popup{
     background: white;
@@ -284,4 +299,29 @@ td.text-right {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 30px;
+}
+
+.button-table{
+    background-color: transparent;
+}
+
+
+.loading{
+    width: 40px;
+    height: 40px;
+    border: 5px solid;
+    border-color: #0084ff #e6e6e6 #e6e6e6;
+    border-radius: 50%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading{
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
 }

@@ -13,16 +13,18 @@ const validateEmail = (email) => {
         (dominio.lastIndexOf(".") < dominio.length - 1)) {
         //document.getElementById("msgemail").innerHTML="E-mail válido";
         //alert("E-mail valido");
-        console.log('email válido')
+        return true;
     }
     else{
-        console.log('email inválido')
+        return false;
         //document.getElementById("msgemail").innerHTML="<font color='red'>E-mail inválido </font>";
     }
 }
 
 const validatePassword = (password) => {
     if(password.value.length < 4){
-        console.log('senha inválida')
+        return false;
+    }else{
+        return true;
     }
 }

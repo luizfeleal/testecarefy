@@ -24,18 +24,25 @@
                 <input type="password" name="password" class="input-text" id="password" placeholder="Senha">
             </div>
             <div class="div-button-login">
-                <button type="button" class="button-primary">Entrar</button>
+                <button type="button" class="button-primary" onclick="login('teste')">Entrar</button>
             </div>
             <hr>
             <p>Ou</p>
             <h2>Conecte-se com</h2>
             <div class="div-button-login-github">
-                <button type="button" class="button-with-icon-secundary"><img src="{{ asset('img/icons/github-icon-white.png') }}" alt="Lock icon" width="40px" height="30px"> GitHub</button>
+                <button type="button" class="button-with-icon-secundary" onclick="window.location.href = 'http://localhost:9000/auth/redirect'"><img src="{{ asset('img/icons/github-icon-white.png') }}" alt="Lock icon" width="40px" height="30px"> GitHub</button>
             </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal-container">
+        <div class="modal-popup">
+
         </div>
     </div>
 
     <script src="{{ asset('js/Validations.js') }}"></script>
     <script src="{{ asset('js/Events.js') }}"></script>
+    <script src="{{ asset('js/Assets.js') }}"></script>
 </body>
 </html>

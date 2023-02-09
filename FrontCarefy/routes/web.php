@@ -31,7 +31,7 @@ Route::get('/platform', function () {
 
    }else{
 
-    return view('login');
+        return view('login');
    }
 })->name('platform.page');
 
@@ -42,6 +42,7 @@ Route::get('/auth/redirect', function () {
      return Socialite::driver('github')->redirect();
 });
 Route::get('/auth/login', [UserAuthenticateController::class, 'auth']);
+
 Route::get('/auth/callback', function () {
      $githubUser = Socialite::driver('github')->user();
 
