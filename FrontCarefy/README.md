@@ -7,6 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
 Para rodar seu projeto, execute o seguite comando: 
 
 + Executar
@@ -17,8 +18,31 @@ Para executar, execute o seguinte comando , no terminal, na raiz da pasta "Front
 
 + Executar
 
-        php artisan serve --port=9000
+        composer update
+        
++ Executar
 
+        cp .env.example .env
+
++ Executar
+
+        php artisan key:generate
+
+
+
+#Após executar esse comandos, configurar as seguintes variáveis no arquivo .emv
+
++ Variáveis
+
+        GITHUB_CLIENT_ID="422c4b0d22fea4b52262"
+        GITHUB_CLIENT_SECRET="3e94bfcb431b9d4d56f4a3f58c2c22d345540169"
+        GITHUB_CALLBACK_URL="http://localhost:9000/auth/callback"
+
++ Executar
+
+        php artisan serve --port=9000
+        
+        
 Para a criação da plataforma foi utilizado o Laravel, JavaScript, HTML, CSS, jQuery
 
 A plataforma contempla as seguintes funções:
@@ -31,5 +55,6 @@ A plataforma contempla as seguintes funções:
 pacientes.
 
 #Executar o script dentro do arquivo "Script.sql" para criação do banco de dados
+
 
 
