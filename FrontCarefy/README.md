@@ -7,68 +7,29 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-Para roda seu projeto, execute o seguite comando: "Composer update"
-Para executar, execute o seguinte comando, no terminal, na raiz da pasta "API"
+Para rodar seu projeto, execute o seguite comando: 
 
 + Executar
 
-        php artisan serve --port=8000
-  
+        composer update
 
-### URL de acesso
-http://localhost:8000/api/
+Para executar, execute o seguinte comando , no terminal, na raiz da pasta "FrontCarefy":
 
-### Requisição HTTP
++ Executar
 
-Segui a estrutura padrão do estilo [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer)
+        php artisan serve --port=9000
 
-- GET: lista ou consulta dados
-- POST: criação de dados
-- PUT: atualização de dados
-- DELETE: remoção de dados
+Para a criação da plataforma foi utilizado o Laravel, JavaScript, HTML, CSS, jQuery
 
+A plataforma contempla as seguintes funções:
 
-### Rotas
++ Tela de login com usuário e senha com autenticação via github.
++ Ao realizar o login, deve carregar uma tela com a lista de pacientes
++ cadastrados com as opções de exclusão e edição.
++ Deve conter um botão na tela para cadastro de novos pacientes.
++ Utilizar banco de dados para gerenciar as inclusões e exclusões dos
+pacientes.
 
-
-+ /person - Realiza todas as transações para um pessoa (plataforma)
-+ /user - Realiza todas as operações para um usuário
-+ /user/login - Verifica os dados de login
+#Executar o script dentro do arquivo "Script.sql" para criação do banco de dados
 
 
-
-## Códigos de respostas
-
-+ 200 (application/json)
-
-        Sucesso
-
-+ 401 (text/json)
-
-
-+ 404 (text/json)
-
-        Registro não encontrado
-
-+ 409 (text/json)
-
-        Conflito, problema com alguma regra/restrição 
-
-+ 500 (text/json)
-
-        Erro do servidor
-
-
-### Padrão de endpoints
-    Para listagem, use GET: /endpoint/
-    Para inserção, use POST: /endpoint/
-    Para visualização, use GET: /endpoint/{id}
-    Para atualização, use PUT: /endpoint/{id}
-    Para exclusão, use DELETE: /endpoint/{id}
-    
-    
-
-### Header
-A requisição deve conter:
-
-- Content-Type: application/json
