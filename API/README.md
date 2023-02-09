@@ -7,12 +7,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+
 Para roda seu projeto, execute o seguite comando: "Composer update"
 Para executar, execute o seguinte comando, no terminal, na raiz da pasta "API"
 
 + Executar
 
+        composer update
+        
++ Executar
+
+        cp .env.example .env
+
++ Executar
+
+        php artisan key:generate
+
++ Executar
+
         php artisan serve --port=8000
+        
+                
+        
   
 
 ### URL de acesso
@@ -72,3 +88,4 @@ Segui a estrutura padrão do estilo [RESTful](https://en.wikipedia.org/wiki/Repr
 A requisição deve conter:
 
 - Content-Type: application/json
+
