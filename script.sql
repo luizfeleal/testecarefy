@@ -15,7 +15,6 @@ USE testecarefy;
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL ,
   `nome` varchar(50) DEFAULT NULL,
-  `cpf` varchar(16) NOT NULL,
   `data_criacao` timestamp NOT NULL DEFAULT current_timestamp(),
   `data_alteracao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
