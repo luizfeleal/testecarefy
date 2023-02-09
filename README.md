@@ -70,6 +70,7 @@ A requisição deve conter:
 
 
 ## Plataforma
+
 Para rodar seu projeto, execute o seguite comando: 
 
 + Executar
@@ -93,11 +94,9 @@ A plataforma contempla as seguintes funções:
 + Utilizar banco de dados para gerenciar as inclusões e exclusões dos
 pacientes.
 
-#Comando para ciração de banco de dados
+#Executar o script dentro do arquivo "Script.sql" para criação do banco de dados
 
-+ Executar
 
-        php artisan migrate 
 
 
 
