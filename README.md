@@ -93,11 +93,7 @@ A plataforma contempla as seguintes funções:
 + Utilizar banco de dados para gerenciar as inclusões e exclusões dos
 pacientes.
 
-#Comando para ciração de banco de dados
-
-+ Executar
-
-        php artisan migrate 
+#Executar o script dentro do arquivo "Script.sql" para criação do banco de dados
 
 
 
